@@ -1,4 +1,4 @@
-package Pages;
+package Steps;
 
 import Data.Constants;
 import junit.framework.Assert;
@@ -11,16 +11,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class HolidayPage extends Pages.BasePage {
+public class HolidayPageSteps extends BasePageSteps {
 
-    public HolidayPage(WebDriver driver) {
+    public HolidayPageSteps(WebDriver driver) {
         super(driver);
     }
 
-    public void navigateToHoliday() {
+
+    public HolidayPageSteps navigateToHoliday() {
         driver.get(Constants.HOMEURL);
         WebElement holiday = driver.findElement(By.xpath("//li[@class='MoreCategories']/a[@href='/category/24/dasveneba']"));
         holiday.click();
+        return this;
     }
 
     public List<Integer> numericValue(List<WebElement> priceElements) {
@@ -157,23 +159,35 @@ public class HolidayPage extends Pages.BasePage {
         clickAndFill(min,minimum);
         clickAndFill(max,maximum);
     }
-    public void sortByDescending(){
+    public HolidayPageSteps sortByDescending(){
         sortBy(Constants.DESCENDING);
+        return this;
     }
-    public void mostExpensive(){
+    public HolidayPageSteps mostExpensive(){
         Comparator(Constants.MOSTEXPENSIVE, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return this;
     }
-    public void sortByAscending(){
+    public HolidayPageSteps sortByAscending(){
         sortBy(Constants.ASCENDING);
+        return this;
     }
-    public void leastExpensive(){
+    public HolidayPageSteps leastExpensive(){
         Comparator(Constants.LEASTEXPENSIVE, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return this;
+    }
+    public HolidayPageSteps isDescending(){Comparator(Constants.ISDESCENDING,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        return this;
+    }
+    public HolidayPageSteps isAscending(){Comparator(Constants.ISASCENDING,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        return this;
     }
 
-    public void filteredByKoteji(){
+    public HolidayPageSteps filteredByKoteji(){
         filterBy(Constants.KOTEJI);
+        return this;
     }
-    public void priceRange(){
+    public HolidayPageSteps priceRange(){
         setPriceRange(200, 450);
+        return this;
     }
 }

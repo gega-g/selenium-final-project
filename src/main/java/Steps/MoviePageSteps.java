@@ -1,7 +1,6 @@
-package Pages;
+package Steps;
 
 import Data.Constants;
-import Steps.Common;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,20 +10,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoviePage extends Pages.BasePage {
-    public MoviePage(WebDriver driver) {
+public class MoviePageSteps extends BasePageSteps {
+    public MoviePageSteps(WebDriver driver) {
         super(driver);
     }
-    Common common = new Common(driver);
+    CommonSteps commonSteps = new CommonSteps(driver);
 
-    public void navigateToFirstMovie(){
-        common.clickOn(driver.findElement(By.xpath("//li[@class='MoreCategories']/a[@href='/events']")));
-        common.clickOn(driver.findElement(By.xpath("//div[@class='movies-deal'][1]")));
+    public MoviePageSteps navigateToFirstMovie(){
+        commonSteps.clickOn(driver.findElement(By.xpath("//li[@class='MoreCategories']/a[@href='/events']")));
+        commonSteps.clickOn(driver.findElement(By.xpath("//div[@class='movies-deal'][1]")));
+        return this;
     }
-    public void clickOnEastPoint() {
+    public MoviePageSteps clickOnEastPoint() {
         WebElement eastPoint = driver.findElement(By.xpath("//a[@id='ui-id-5'][@class='ui-tabs-anchor']"));
         js.executeScript(Constants.JSSCROLLTOMIDDLE, eastPoint);
         eastPoint.click();
+        return this;
     }
 
 
@@ -41,7 +42,7 @@ public class MoviePage extends Pages.BasePage {
         return visibleSeances;
     }
 
-    public void chooseLastDay() {
+    public MoviePageSteps chooseLastDay() {
         List<WebElement> days = driver.findElements(By.cssSelector(Constants.CHOOSELASTDAYCSS));
         List<WebElement> displayedDays = new ArrayList<>();
         for (WebElement day : days) {
@@ -51,8 +52,9 @@ public class MoviePage extends Pages.BasePage {
         }
         WebElement lastDay = displayedDays.get(displayedDays.size() - 1);
         lastDay.click();
+        return this;
     }
-    public void clickOnLastSeance() {
+    public MoviePageSteps clickOnLastSeance() {
         List<WebElement> visibleSeances = getVisibleSeances();
         if (!visibleSeances.isEmpty()) {
             WebElement lastSeance = visibleSeances.get(visibleSeances.size() - 1);
@@ -60,24 +62,28 @@ public class MoviePage extends Pages.BasePage {
         } else {
             Assert.fail(Constants.THEREARENOELEMENTS);
         }
+        return this;
     }
-    public void validateName(){
+    public MoviePageSteps validateName(){
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='seat free']")));
         String name = driver.findElement(By.xpath("//p[@class='name']")).getText();
         String nameInPopup = driver.findElement(By.xpath("//p[@class='movie-title']")).getText();
         Assert.assertEquals(name,nameInPopup);
+        return this;
     }
-    public void validateCinema(){
+    public MoviePageSteps validateCinema(){
         String cinema = driver.findElement(By.id(Constants.UIID5)).getText();
         String cinemaInPopup = driver.findElement(By.xpath("//p[@class='movie-cinema'][1]")).getText();
         Assert.assertEquals(cinema,cinemaInPopup);
+        return this;
     }
 
-    public void chooseSeatAndStartCreatingAccount(){
+    public MoviePageSteps chooseSeatAndStartCreatingAccount(){
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='seat free']")));
-        common.clickOn(driver.findElement(By.xpath("//div[@class='seat free']")));
+        commonSteps.clickOn(driver.findElement(By.xpath("//div[@class='seat free']")));
         WebElement createNew = driver.findElement(By.xpath("//a[contains(text(), 'შექმენი')]"));
         js.executeScript(Constants.JSSCROLLTOMIDDLE, createNew);
-        common.clickOn(createNew);
+        commonSteps.clickOn(createNew);
+        return this;
     }
 }

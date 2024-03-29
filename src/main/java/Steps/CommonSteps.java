@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Common extends Pages.BasePage {
+public class CommonSteps extends BasePageSteps {
 
-    public Common(WebDriver driver) {
+    public CommonSteps(WebDriver driver) {
         super(driver);
     }
     public void clickOn(WebElement element){

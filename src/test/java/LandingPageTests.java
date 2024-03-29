@@ -1,30 +1,30 @@
 import Data.Constants;
-import Pages.HolidayPage;
-import Pages.LandingPage;
-import Steps.Common;
+import Steps.HolidayPageSteps;
+import Steps.LandingPageSteps;
+import Steps.CommonSteps;
 import org.testng.annotations.Test;
 
 public class LandingPageTests extends TestBase{
     @Test
     public void activeCategoryTest(){
-        LandingPage landingPage = new LandingPage(driver);
-        Common common = new Common(driver);
+        LandingPageSteps landingPage = new LandingPageSteps(driver);
+        CommonSteps commonSteps = new CommonSteps(driver);
 
-        common.navigateToLandingPage();
-        common.acceptCookies();
-        landingPage.clickOnCategories();
-        landingPage.hoverOnSport();
-        landingPage.clickOnCarting();
-        landingPage.urlMatcher(Constants.CARTINGURL);
-        landingPage.colorChecker();
+        commonSteps.navigateToLandingPage();
+        commonSteps.acceptCookies();
+        landingPage.clickOnCategories()
+                .hoverOnSport()
+                .clickOnCarting()
+                .urlMatcher(Constants.CARTINGURL)
+                .colorChecker();
     }
 
     @Test
     public void logoTest(){
-        LandingPage landingPage = new LandingPage(driver);
-        HolidayPage holidayPage = new HolidayPage(driver);
+        LandingPageSteps landingPage = new LandingPageSteps(driver);
+        HolidayPageSteps holidayPage = new HolidayPageSteps(driver);
         holidayPage.navigateToHoliday();
-        landingPage.clickOnLogo();
-        landingPage.urlMatcher(Constants.HOMEURL);
+        landingPage.clickOnLogo()
+                .urlMatcher(Constants.HOMEURL);
     }
 }

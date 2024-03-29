@@ -1,7 +1,6 @@
-package Pages;
+package Steps;
 
 import Data.Constants;
-import Steps.Common;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,69 +10,82 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class CreateNewAccountPage extends Pages.BasePage {
+public class CreateNewAccountPageSteps extends BasePageSteps {
 
-    public CreateNewAccountPage(WebDriver driver) {
+    public CreateNewAccountPageSteps(WebDriver driver) {
         super(driver);
     }
-    Common common = new Common(driver);
+    CommonSteps commonSteps = new CommonSteps(driver);
 
-    public void fillEmail(){
+    public CreateNewAccountPageSteps fillEmail(){
         WebElement emailField = driver.findElement(By.id(Constants.EMAIL));
-        common.clickAndFill(emailField,Constants.NOTEMAIL);
+        commonSteps.clickAndFill(emailField,Constants.NOTEMAIL);
+        return this;
     }
-    public void fillPassword(){
+    public CreateNewAccountPageSteps fillPassword(){
         WebElement password = driver.findElement(By.cssSelector("input[type='password']"));
-        common.clickAndFill(password, Constants.PASSWORD);
+        commonSteps.clickAndFill(password, Constants.PASSWORD);
+        return this;
     }
-    public void fillPasswordRepeat(){
+    public CreateNewAccountPageSteps fillPasswordRepeat(){
         WebElement passwordRepeat = driver.findElement(By.id(Constants.PASSWORDRETYPE));
-        common.clickAndFill(passwordRepeat, Constants.PASSWORD);
+        commonSteps.clickAndFill(passwordRepeat, Constants.PASSWORD);
+        return this;
     }
-    public void setGender(){
-        common.clickOn(driver.findElement(By.xpath("//span[contains(text(), 'მდედრობითი')]")));
+    public CreateNewAccountPageSteps setGender(){
+        commonSteps.clickOn(driver.findElement(By.xpath("//span[contains(text(), 'მდედრობითი')]")));
+        return this;
     }
-    public void fillName(){
+    public CreateNewAccountPageSteps fillName(){
         WebElement firstName = driver.findElement(By.cssSelector("input[type='text'][name='firstname'][placeholder='სახელი']"));
-        common.clickAndFill(firstName,Constants.NAME);
+        commonSteps.clickAndFill(firstName,Constants.NAME);
+        return this;
     }
-    public void fillLastName(){
+    public CreateNewAccountPageSteps fillLastName(){
         WebElement lastName = driver.findElement(By.cssSelector("input[type='text'][name='lastname'][placeholder='გვარი']"));
-        common.clickAndFill(lastName,Constants.LASTNAME);
+        commonSteps.clickAndFill(lastName,Constants.LASTNAME);
+        return this;
     }
-    public void scrollToButton() {
+    public CreateNewAccountPageSteps scrollToButton() {
         WebElement submitButton = driver.findElement(By.id(Constants.REGISTRATIONBUTTON));
         wait.until((ExpectedCondition<Boolean>) driver -> js.executeScript("return document.readyState").equals(Constants.COMPLETE));
         js.executeScript(Constants.JSSCROLLTOMIDDLE, submitButton);
         wait.until(ExpectedConditions.elementToBeClickable(submitButton));
+        return this;
     }
-    public void chooseBirthDate(){
+    public CreateNewAccountPageSteps chooseBirthDate(){
         WebElement dropDown = driver.findElement(By.xpath("//span[@class='select2-selection__placeholder']"));
-        common.clickOn(dropDown);
+        commonSteps.clickOn(dropDown);
         WebElement year = driver.findElement(By.xpath("//li[@class='select2-results__option select2-results__option--selectable']"));
-        common.clickOn(year);
+        commonSteps.clickOn(year);
+        return this;
     }
-    public void fillPhoneNumber(){
+    public CreateNewAccountPageSteps fillPhoneNumber(){
         WebElement phoneNumber = driver.findElement(By.id(Constants.PHONE));
-        common.clickAndFill(phoneNumber, 514222222);
+        commonSteps.clickAndFill(phoneNumber, 514222222);
+        return this;
     }
-    public void fillPhoneCode(){
+    public CreateNewAccountPageSteps fillPhoneCode(){
         WebElement phoneCode = driver.findElement(By.id(Constants.PHONECODE));
-        common.clickAndFill(phoneCode, 1234);
+        commonSteps.clickAndFill(phoneCode, 1234);
+        return this;
     }
-    public void checkmarks(){
+    public CreateNewAccountPageSteps checkmarks(){
         List<WebElement> checkmarks = driver.findElements(By.xpath("//span[@class='checkmark'][1]"));
         for(WebElement checkmark:checkmarks){
             checkmark.click();
         }
+        return this;
     }
-    public void submit(){
+    public CreateNewAccountPageSteps submit(){
         WebElement submitButton = driver.findElement(By.id(Constants.REGISTRATIONBUTTON));
-        common.clickOn(submitButton);
+        commonSteps.clickOn(submitButton);
+        return this;
     }
-    public void emailMessage(){
+    public CreateNewAccountPageSteps emailMessage(){
         String emailMessage = driver.findElement(By.id(Constants.INPUTERRORMAIL)).getText();
         Assert.assertEquals(emailMessage,Constants.MAILISINCORRECT);
+        return this;
     }
 
 

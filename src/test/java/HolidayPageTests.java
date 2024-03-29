@@ -1,38 +1,40 @@
-import Pages.HolidayPage;
+import Steps.HolidayPageSteps;
 import org.testng.annotations.Test;
 
 public class HolidayPageTests extends TestBase {
 
     @Test
     public void descendingOrderTest() {
-        HolidayPage holidayPage = new HolidayPage(driver);
-        holidayPage.navigateToHoliday();
-        holidayPage.sortByDescending();
-        holidayPage.mostExpensive();
+        HolidayPageSteps holidayPage = new HolidayPageSteps(driver);
+        holidayPage.navigateToHoliday()
+                .sortByDescending()
+                .mostExpensive()
+                .isDescending();
     }
 
     @Test
     public void ascendingOrderTest() {
-        HolidayPage holidayPage = new HolidayPage(driver);
-        holidayPage.navigateToHoliday();
-        holidayPage.sortByAscending();
-        holidayPage.leastExpensive();
+        HolidayPageSteps holidayPage = new HolidayPageSteps(driver);
+        holidayPage.navigateToHoliday()
+                .sortByAscending()
+                .leastExpensive()
+                .isAscending();
     }
 
     @Test
     public void filterTest() {
-        HolidayPage holidayPage = new HolidayPage(driver);
-        holidayPage.navigateToHoliday();
-        holidayPage.filteredByKoteji();
-        holidayPage.sortByAscending();
-        holidayPage.leastExpensive();
+        HolidayPageSteps holidayPage = new HolidayPageSteps(driver);
+        holidayPage.navigateToHoliday()
+                .filteredByKoteji()
+                .sortByAscending()
+                .leastExpensive();
     }
 
     @Test
     public void priceRangeTest() {
-        HolidayPage holidayPage = new HolidayPage(driver);
-        holidayPage.navigateToHoliday();
-        holidayPage.priceRange();
-        holidayPage.searchAndAssert();
+        HolidayPageSteps holidayPage = new HolidayPageSteps(driver);
+        holidayPage.navigateToHoliday()
+                .priceRange()
+                .searchAndAssert();
     }
 }

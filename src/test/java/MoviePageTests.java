@@ -1,40 +1,40 @@
-import Pages.CreateNewAccountPage;
-import Steps.Common;
-import Pages.MoviePage;
+import Steps.CreateNewAccountPageSteps;
+import Steps.CommonSteps;
+import Steps.MoviePageSteps;
 import org.testng.annotations.Test;
 
 public class MoviePageTests extends TestBase {
     @Test
     public void moviePageTests(){
-        Common common = new Common(driver);
-        MoviePage moviePage = new MoviePage(driver);
-        CreateNewAccountPage newAcc = new CreateNewAccountPage(driver);
+        CommonSteps commonSteps = new CommonSteps(driver);
+        MoviePageSteps moviePage = new MoviePageSteps(driver);
+        CreateNewAccountPageSteps createNewAccountPageSteps = new CreateNewAccountPageSteps(driver);
 
-        common.navigateToLandingPage();
-        common.acceptCookies();
-        moviePage.navigateToFirstMovie();
-        moviePage.clickOnEastPoint();
-        moviePage.getVisibleSeances();
-        moviePage.chooseLastDay();
-        moviePage.clickOnLastSeance();
-        moviePage.validateName();
-        moviePage.validateCinema();
-        moviePage.chooseSeatAndStartCreatingAccount();
+        commonSteps.navigateToLandingPage();
+        commonSteps.acceptCookies();
+        moviePage.navigateToFirstMovie()
+                .clickOnEastPoint()
+                .getVisibleSeances();
+        moviePage.chooseLastDay()
+                .clickOnLastSeance()
+                .validateName()
+                .validateCinema()
+                .chooseSeatAndStartCreatingAccount();
 
-        newAcc.fillEmail();
-        newAcc.fillPassword();
-        newAcc.fillPasswordRepeat();
-        newAcc.setGender();
-        newAcc.fillName();
-        newAcc.scrollToButton();
-        newAcc.fillLastName();
-        newAcc.scrollToButton();
-        newAcc.chooseBirthDate();
-        newAcc.fillPhoneNumber();
-        newAcc.fillPhoneCode();
-        newAcc.checkmarks();
-        newAcc.scrollToButton();
-        newAcc.submit();
-        newAcc.emailMessage();
+        createNewAccountPageSteps.fillEmail()
+                .fillPassword()
+                .fillPasswordRepeat()
+                .setGender()
+                .fillName()
+                .scrollToButton()
+                .fillLastName()
+                .scrollToButton()
+                .chooseBirthDate()
+                .fillPhoneNumber()
+                .fillPhoneCode()
+                .checkmarks()
+                .scrollToButton()
+                .submit()
+                .emailMessage();
     }
 }
